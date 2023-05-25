@@ -34,6 +34,10 @@
     margin: 9px
 }
 
+.weather-box.text-center img {
+    height: 60px;
+}
+
 /* Styles for dark mode */
 @media (prefers-color-scheme: dark) {
     body {
