@@ -1,0 +1,50 @@
+.searchBar {
+    background: whitesmoke;
+    padding: 15px 0px 15px 15px;
+    border-radius:15px;
+    overflow: hidden;
+}
+
+.searchCol {
+    padding-right: 0px !important;
+}
+
+.searchButton {
+    height: 150%;
+    align-self: center;
+    width: 40%;
+}
+
+.weekDisplayContainer {
+    background: whitesmoke;
+    border: none;
+    border-radius: 20px;
+}
+
+.bg-none {
+    margin-top: 20px !important;
+    background: transparent !important;
+}
+
+.scollButton {
+    display: contents;
+}
+
+.col-lg-8.d-flex div {
+    margin: 9px
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+      background-color: rgb(44, 44, 44);
+      color: white;
+    }
+
+    .searchBar {
+        background: rgb(96, 96, 96);
+    }
+    .weekDisplayContainer {
+        background: rgb(96, 96, 96);
+    }
+}
