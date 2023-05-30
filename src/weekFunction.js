@@ -1,6 +1,6 @@
 import React from 'react';
 
-function weekPartial() {
+function weekPartial({ dayData }) {
   return (
     <div className="container mt-2 bg-none">
       <div className="card weekDisplayContainer">

@@ -1,27 +1,106 @@
-import React from 'react';
-function searchPartial() {
-  return (
-    <div className="container mt-2 mb-2">
+// function searchPartial() {
+//   return (
+//     <div className="container mt-2 mb-2">
 
-    <div id="weather-form row" className='searchBar'>
-      <form>
-        <div className='col-lg-12 d-flex searchCol'>
-          <div className="form-group col-lg-6">
-            <label htmlFor="location-input">Location:</label>
-            <input type="text" className="form-control" id="location-input" placeholder="Enter location"></input>
+//     <div id="weather-form row" className='searchBar'>
+//       <form>
+//         <div className='col-lg-12 d-flex searchCol'>
+//           <div className="form-group col-lg-6">
+//             <label htmlFor="location-input">Location:</label>
+//             <input type="text" className="form-control" id="location-input" placeholder="Enter location"></input>
+//           </div>
+//           <div className="form-group col-lg-4">
+//             <label htmlFor="date-input">Date:</label>
+//             <input type="date" className="form-control" id="date-input"></input>
+//           </div>
+//           <div className="col-lg-2 d-flex flex-row-reverse searchCol">
+//           <button type="submit" className="btn btn-danger searchButton"><i className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
+//           </div>
+//         </div>
+//       </form>
+//   </div>
+// </div>
+//   );
+// }
+
+
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function SearchPartial() {
+  let days = {}
+  const [location, setLocation] = useState('');
+  const [weatherResult, setResult] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Make your API request using Axios
+    try {
+      const response = await axios.get('http://localhost:5000/weather', {
+        params: {
+          city: searchTerm,
+          date: selectedDate
+        }
+      });
+
+      // Process the response data
+      days = response.data.forecastDay
+      setLocation(response.data.location);
+      setResult(response.data.forecastDay[0].hour)
+      console.log('location',location)
+      console.log('days: ', days)
+      console.log(response.data);
+    } catch (error) {
+      // Handle any errors
+      console.error(error);
+    }
+  };
+
+  return (
+        <div className="container mt-2 mb-2">
+          <div id="weather-form row" className='searchBar'>
+            <form onSubmit={handleSubmit}>
+              <div className='col-lg-12 d-flex searchCol'>
+                <div className="form-group col-lg-6">
+                  <label htmlFor="location-input">Location:</label>
+                  <input type="text" className="form-control" id="location-input" onChange={handleInputChange} placeholder="Enter location"></input>
+                </div>
+                <div className="form-group col-lg-4">
+                  <label htmlFor="date-input">Date:</label>
+                  <input type="date" className="form-control" id="date-input" onChange={handleDateChange}></input>
+                </div>
+                <div className="col-lg-2 d-flex flex-row-reverse searchCol">
+                <button type="submit" className="btn btn-danger searchButton"><i className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
+                </div>
+              </div>
+            </form>
           </div>
-          <div className="form-group col-lg-4">
-            <label htmlFor="date-input">Date:</label>
-            <input type="date" className="form-control" id="date-input"></input>
-          </div>
-          <div className="col-lg-2 d-flex flex-row-reverse searchCol">
-          <button type="submit" className="btn btn-danger searchButton"><i className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
+          <div>
+            {location}
+            {/* {JSON.stringify(weatherResult)} */}
+            {weatherResult.length > 0 && (
+              <div>
+                {weatherResult.map((hour) => (
+                  <div key={hour.time}>{hour.time} Temp: {hour.temp_c}</div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </form>
-  </div>
-</div>
   );
 }
 
-export default searchPartial;
+
+
+
+export default SearchPartial;

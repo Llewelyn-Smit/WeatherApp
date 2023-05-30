@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import Headpartial from './headFunction';
-import Searchpartial from './searchFunction';
+import SearchPartial from './searchFunction';
 import Weekpartial from './weekFunction';
 const header = document.getElementById('top');
 const head = ReactDOM.createRoot(header);
@@ -12,14 +12,14 @@ const week = ReactDOM.createRoot(weekly);
 week.render(<Weekpartial/>);
 const searcher = document.getElementById('search');
 const searching = ReactDOM.createRoot(searcher);
-searching.render(<Searchpartial/>);
+searching.render(<SearchPartial/>);
 
 reportWebVitals();
 
 class App extends Component {
-state = {
-    data: null
-  };
+    state = {
+        data: null
+    };
 
   componentDidMount() {
     this.callBackendAPI()
