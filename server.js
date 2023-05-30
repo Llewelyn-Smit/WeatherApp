@@ -32,6 +32,7 @@ app.get('/weather', async (req, res) => {
       location: response.data.location.name,
       temperature: response.data.current.temp_c,
       condition: response.data.current.condition.text,
+      forecastDay: response.data.forecast.forecastday
     };
     console.log('results: ', response)
     // Send the weather data back to the front-end

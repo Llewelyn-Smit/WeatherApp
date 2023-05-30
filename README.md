@@ -5,7 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
-### npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+### npm install @fortawesome/react-fontawesome @fortawesome/
+### npm install axios
+free-solid-svg-icons
 
 ### `npm start`
 
