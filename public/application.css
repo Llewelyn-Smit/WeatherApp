@@ -53,3 +53,9 @@
     }
 }
 
+.cont-border
+{
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgb(46, 123, 211);
+}

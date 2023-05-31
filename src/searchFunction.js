@@ -33,9 +33,12 @@ function SearchPartial() {
   const [weatherResult, setResult] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
-  
+  const [tempStandard , setTempStandard] = useState(0);
   var timePart;
   
+  const handleStandardChange = (event)=>{
+    setTempStandard(event.target.selectedIndex)
+  }
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -70,6 +73,7 @@ function SearchPartial() {
   };
 
   return (
+    
   <div>
     <div className="container mt-2 mb-2">
         <div id="weather-form row" className='searchBar'>
@@ -84,8 +88,15 @@ function SearchPartial() {
                         <label htmlFor="date-input">Date:</label>
                         <input type="date" className="form-control" id="date-input" onChange={handleDateChange}></input>
                     </div>
+                    <div className="form-group col-lg-4">
+                        <label htmlFor="standard-input">Standard:</label>
+                        <select  className="form-control"  id="standard-input" onChange={handleStandardChange}>
+                          <option value='celsius'>celsius</option>
+                          <option value='fahrenheit'>fahrenheit</option>
+                        </select>
+                    </div>
                     <div className="col-lg-2 d-flex flex-row-reverse searchCol">
-                        <button type="submit" className="btn btn-danger searchButton"><i
+                        <button type="submit" onClick={handleSubmit} className="btn btn-danger searchButton"><i
                                 className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
                     </div>
                 </div>
@@ -95,26 +106,27 @@ function SearchPartial() {
   
       <div className="container mt-2 bg-none">
         <div className="card weekDisplayContainer">
-          <h5 className="card-title text-center mt-4">Location: {location}</h5>
+          <h5 className="card-title text-center mt-4">{location}</h5>
           <div className="card-body weekDisplayContainer">
             <div className="row justify-content-center">
               <div className="col-lg-2 align-middle scollButton">
-                <button className="btn btn-danger" id="previous-week-btn">
-                  <i className="fas fa-chevron-left"></i>
-                </button>
+              
+<div className='container'>
                 {weatherResult.length > 0 && (
                   <div className="row">
                     {weatherResult.map((hour, index) => (
-                      <div key={hour.time} className="col-lg-2 d-flex">
+                      <div key={hour.time} className="col-lg-2 d-flex cont-border"> 
                        
-                        <div className="">
-                          <div className="weather-box text-center">
-                            {split(hour.time)}
-                            <h6>{timePart}</h6>
-                            <img src={hour.condition.icon} alt={hour.condition.text} />
-                            <p>{hour.temp_c}</p>
-                          </div>
-                        </div>
+                      <div className="">
+  <div className="weather-box text-center">
+    {split(hour.time)}
+    <h6>{timePart}</h6>
+    <img src={hour.condition.icon} alt={hour.condition.text} />
+    {console.log('tempStandard state:', tempStandard )}
+    {tempStandard === 0 ? <p>{hour.temp_c}</p> : <p>{hour.temp_f}</p>}
+  </div>
+</div>
+
                       </div>
                     ))}
                     {Array.from({ length: Math.ceil(weatherResult.length / 6) }, (_, i) => (
@@ -122,6 +134,7 @@ function SearchPartial() {
                     ))}
                   </div>
                 )}
+                </div>
               </div>
             </div>
           </div>
@@ -132,6 +145,7 @@ function SearchPartial() {
   
   
 }
+
 
 function split(a){
   var dateTimeParts = a.split(' ');
