@@ -67,37 +67,72 @@ function SearchPartial() {
   };
 
   return (
-        <div className="container mt-2 mb-2">
-          <div id="weather-form row" className='searchBar'>
+  <div>
+    <div className="container mt-2 mb-2">
+        <div id="weather-form row" className='searchBar'>
             <form onSubmit={handleSubmit}>
-              <div className='col-lg-12 d-flex searchCol'>
-                <div className="form-group col-lg-6">
-                  <label htmlFor="location-input">Location:</label>
-                  <input type="text" className="form-control" id="location-input" onChange={handleInputChange} placeholder="Enter location"></input>
+                <div className='col-lg-12 d-flex searchCol'>
+                    <div className="form-group col-lg-6">
+                        <label htmlFor="location-input">Location:</label>
+                        <input type="text" className="form-control" id="location-input" onChange={handleInputChange}
+                            placeholder="Enter location"></input>
+                    </div>
+                    <div className="form-group col-lg-4">
+                        <label htmlFor="date-input">Date:</label>
+                        <input type="date" className="form-control" id="date-input" onChange={handleDateChange}></input>
+                    </div>
+                    <div className="col-lg-2 d-flex flex-row-reverse searchCol">
+                        <button type="submit" className="btn btn-danger searchButton"><i
+                                className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
+                    </div>
                 </div>
-                <div className="form-group col-lg-4">
-                  <label htmlFor="date-input">Date:</label>
-                  <input type="date" className="form-control" id="date-input" onChange={handleDateChange}></input>
-                </div>
-                <div className="col-lg-2 d-flex flex-row-reverse searchCol">
-                <button type="submit" className="btn btn-danger searchButton"><i className="fas fa-light fa-magnifying-glass-location fa-bounce"></i></button>
-                </div>
-              </div>
             </form>
-          </div>
-          <div>
-            {location}
-            {/* {JSON.stringify(weatherResult)} */}
-            {weatherResult.length > 0 && (
-              <div>
-                {weatherResult.map((hour) => (
-                  <div key={hour.time}>{hour.time} Temp: {hour.temp_c}</div>
-                ))}
+        </div>
+    </div>
+  
+      <div className="container mt-2 bg-none">
+        <div className="card weekDisplayContainer">
+          <h5 className="card-title text-center mt-4">Location: {location}</h5>
+          <div className="card-body weekDisplayContainer">
+            <div className="row justify-content-center">
+              <div className="col-lg-2 align-middle scollButton">
+                <button className="btn btn-danger" id="previous-week-btn">
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                {weatherResult.length > 0 && (
+                  <div className="row">
+                    {weatherResult.map((hour, index) => (
+                      <div key={hour.time} className="col-lg-2 d-flex">
+                        <div className="">
+                          <div className="weather-box text-center">
+                            <h6>{hour.time}</h6>
+                            <img src="/images/weather-icons/icons8-sun-64.png" alt="Sunny" />
+                            <p>{hour.temp_c}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {Array.from({ length: Math.ceil(weatherResult.length / 6) }, (_, i) => (
+                      <div key={i} className="w-100"></div>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
+      </div>
+    </div>
   );
+  
+  
+
+  
+  
+  
+  
+  
+  
 }
 
 
