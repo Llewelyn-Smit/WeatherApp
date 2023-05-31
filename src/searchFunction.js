@@ -33,6 +33,9 @@ function SearchPartial() {
   const [weatherResult, setResult] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+  
+  var timePart;
+  
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -103,10 +106,12 @@ function SearchPartial() {
                   <div className="row">
                     {weatherResult.map((hour, index) => (
                       <div key={hour.time} className="col-lg-2 d-flex">
+                       
                         <div className="">
                           <div className="weather-box text-center">
-                            <h6>{hour.time}</h6>
-                            <img src="/images/weather-icons/icons8-sun-64.png" alt="Sunny" />
+                            {split(hour.time)}
+                            <h6>{timePart}</h6>
+                            <img src={hour.condition.icon} alt={hour.condition.text} />
                             <p>{hour.temp_c}</p>
                           </div>
                         </div>
@@ -126,16 +131,15 @@ function SearchPartial() {
   );
   
   
-
-  
-  
-  
-  
-  
-  
 }
 
+function split(a){
+  var dateTimeParts = a.split(' ');
+  var timePart = dateTimeParts[1];
 
+  return timePart;
+
+}
 
 
 export default SearchPartial;
