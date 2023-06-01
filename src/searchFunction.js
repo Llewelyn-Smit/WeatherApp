@@ -63,7 +63,6 @@ function SearchPartial() {
 
 
   const renderDayFunctionHTML = () => {
-    // Generate the HTML using the data
     return dayFunction(weatherResult, location, tempStandard);
   };
 
@@ -176,8 +175,10 @@ function SearchPartial() {
           </form>
         </div>
       </div>
-     {renderDayFunctionHTML()}
-     
+      {weatherResult.length > 0 && (
+        renderDayFunctionHTML()
+     )}
+
     </div>
   );
 }
