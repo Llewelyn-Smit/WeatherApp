@@ -2,16 +2,16 @@ import React from 'react';
 
 function weekPartial(weatherResult, location, standard) {
   return (
-<div className="container mt-2 bg-none">
   <div className="card weekDisplayContainer">
     <h5 className="card-title text-center mt-4">{location}</h5>
 
     <div className="card-body weekDisplayContainer">
-      <div className="row justify-content-center">
+      <div className="mx-2 row justify-content-center">
         {weatherResult.length > 0 && (
-          <div className="container">
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+          <div id="carouselExampleDark" className="w-100 carousel slide carousel-fade" data-bs-ride="carousel">
+            <div className="carousel-inner">
               {weatherResult.map((hour, index) => {
+                console.log(hour)
                 // Calculate the temperature value to be used for color gradient
                 let temperature = standard === 0 ? hour.temp_c : hour.temp_f;
                 temperature = parseFloat(temperature);
@@ -22,9 +22,10 @@ function weekPartial(weatherResult, location, standard) {
                 return (
                   <div
                     key={hour.time}
-                    className="col d-flex cont-border align-items-center justify-content-center text-center p-3 rounded"
+                    className={index < 1 ? 'active col align-items-center justify-content-center text-center p-3 rounded carousel-item' : 'col align-items-center justify-content-center text-center p-3 rounded carousel-item'}
+                    data-bs-interva='5000'
                     style={{
-                      border: '1px solid #a9c4dd',
+                      // border: '1px solid #a9c4dd',
                       background: `radial-gradient(circle at center, ${gradientColor}, #ffffff)`,
                     }}
                   >
@@ -39,29 +40,38 @@ function weekPartial(weatherResult, location, standard) {
                           style={{ width: '50px', height: '50px' }}
                         />
                       </div>
+                      <div className="row align-items-center justify-content-center mb-2">
+                        {hour.condition.text}
+                          
+                      </div>
                       <div className="row align-items-center justify-content-center">
                         {standard === 0 ? (
-                          <p>{hour.temp_c}</p>
+                          <p>{hour.temp_c} &deg;C</p>
                         ) : (
-                          <p>{hour.temp_f}</p>
+                          <p>{hour.temp_f} &deg;F</p>
                         )}
                       </div>
                     </div>
                   </div>
                 );
               })}
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden"></span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden"></span>
+                </button>
             </div>
           </div>
         )}
       </div>
     </div>
   </div>
-</div>
 
+  );}
 
-
-  );
-}
 function getGradientColor(temperature, standard) {
   let minTemperature = -10; // Minimum temperature value (Celsius)
   let maxTemperature = 40; // Maximum temperature value (Celsius)

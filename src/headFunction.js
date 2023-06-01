@@ -5,15 +5,15 @@ function headPartial() {
 
 <div className="container">
   <div className="row">
-    <div className="col d-flex justify-content-end">
+    <div className="col-2 d-flex justify-content-center my-auto">
       <img className="img-thumbnail rounded-circle" style={{ width: '100px', height: '100px' }} src="/images/turtleLogo.jpg" alt="Turtle Logo" />
     </div>
-    <div className="col">
+    <div className="col-10">
       <div className="row">
-        <h1 className="text-center font-weight-bold" style={{ fontSize: 'min(8vw, max(6vw, 40px))' }}>Turtleneck</h1>
+        <h1 className="text-center" style={{ fontSize: 'min(8vw, max(6vw, 40px))' }}>Turtleneck</h1>
       </div>
       <div className="row">
-        <h3 className="text-center font-weight-light" style={{ fontSize: 'min(4vw, 2.5vw)' }}>WeatherApp</h3>
+        <h4 className="text-center font-weight-light" style={{ fontSize: 'min(4vw, 2.5vw)' }}>WeatherApp</h4>
       </div>
     </div>
   </div>

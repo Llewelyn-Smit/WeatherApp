@@ -27,7 +27,6 @@ app.get('/weather', async (req, res) => {
 
     const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&dt=${date}`);
     // Extract the relevant data from the API response
-    console.dir(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&dt=${date}`)
     const weatherData = {
       location: response.data.location.name,
       temperature: response.data.current.temp_c,

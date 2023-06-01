@@ -1,137 +1,88 @@
-.searchBar {
 
-    background: whitesmoke;
-
-    padding: 15px 0px 15px 15px;
-
-    border-radius:15px;
-
-    overflow: hidden;
-
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: flex !important;
 }
 
+.carousel-control-prev, .carousel-control-next {
+    width: 40px;
+    background: #2c2c2c;
+    opacity: 1;
+}
 
+.carousel-control-prev {
+    border-radius: 25px 0 0 25px;
+}
 
+.carousel-control-next {
+    border-radius: 0 25px 25px 0;
+}
+
+.carousel-inner {
+    border-radius: 35px;
+}
+
+.searchBar {
+    background: whitesmoke;
+    border-radius:15px;
+    overflow: hidden;
+}
 
 .searchCol {
-
     padding-right: 0px !important;
-
 }
-
-
-
 
 .searchButton {
-
     height: 80%;
-
     align-self: center;
-
 }
-
-
-
 
 .weekDisplayContainer {
-
     background: whitesmoke;
-
     border: none;
-
     border-radius: 20px;
-
 }
-
-
-
 
 .bg-none {
-
     margin-top: 20px !important;
-
     background: transparent !important;
-
 }
-
-
-
 
 .scollButton {
-
     display: contents;
-
 }
-
-
-
 
 .col-lg-8.d-flex div {
-
     margin: 9px
-
 }
-
-
-
 
 .weather-box.text-center img {
-
     height: 60px;
-
 }
-
-
-
 
 /* Styles for dark mode */
 
 @media (prefers-color-scheme: dark) {
-
     body {
-
       background-color: rgb(44, 44, 44);
-
       color: white;
-
     }
-
-
-
 
     .searchBar {
-
         background: rgb(96, 96, 96);
-
     }
-
     .weekDisplayContainer {
-
         background: rgb(96, 96, 96);
-
     }
-
 }
 
-
-
-
 .cont-border
-
 {
-
     border-style: solid;
-
     border-radius: 10px;
-
     border-color: rgb(46, 123, 211);
-
 }
 
 .searchContain
-
 {
-
     max-width:90vw
-
 }
