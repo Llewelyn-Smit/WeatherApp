@@ -1,3 +1,8 @@
+# Collaborators
+# Karel Nel => xLightningx-onion
+# Ricardo Erasmus => Rose0Violet
+# Llewelyn => Llewelyn-Smit
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
