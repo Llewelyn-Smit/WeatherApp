@@ -1,14 +1,3 @@
-// const express = require('express'); //Line 1
-// const app = express(); //Line 2
-// const port = process.env.PORT || 5000; //Line 3
-
-// // This displays message that the server running and listening to specified port
-// app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
-
-// // create a GET route
-// app.get('/express_backend', (req, res) => { //Line 9
-//   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
-// }); //Line 11
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -16,27 +5,37 @@ const cors = require('cors');
 
 app.use(cors()); // Enable CORS for all routes
 
+// Define a route for handling GET requests to '/weather'
 app.get('/weather', async (req, res) => {
   try {
+    // Extract the city and date query parameters from the request
     const zipcity = req.query.city;
     const geodate = req.query.date;
+
     const GEO_KEY = "8bd57e7c8b4c47a7d74835a2f88ae461";
 
+    // Send a GET request to the geolocation API to fetch geo data
     const geoResponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${zipcity},za&appid=${GEO_KEY}&date=${geodate}`
     );
+
+    // Extract relevant data from the geolocation API response
     const geoData = {
       country: geoResponse.data.sys.country,
       name: geoResponse.data.name,
     };
 
     const apiKey = '2dd3f3c89f824a17a30194720233005';
-    let city = geoData.name; // Extract the city from the geo API response
+
+    // Extract the city and date for weather data from the geoData object
+    let city = geoData.name;
     const date = req.query.date;
 
     try {
+      // Send a GET request to the weather API to fetch weather data
       const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&dt=${date}`);
 
+      // Extract relevant data from the weather API response
       const weatherData = {
         location: response.data.location.name,
         temperature: response.data.current.temp_c,
@@ -44,6 +43,7 @@ app.get('/weather', async (req, res) => {
         forecastDay: response.data.forecast.forecastday
       };
 
+      // Send the weather data as a JSON response
       res.json(weatherData);
     } catch (error) {
       console.error(error);
@@ -53,12 +53,16 @@ app.get('/weather', async (req, res) => {
     console.error(error);
 
     const apiKey = '2dd3f3c89f824a17a30194720233005';
-    const city = req.query.city; // Use the city from the query parameters if geo API fails
+
+    // If the geolocation API fails, use the city from the query parameters
+    const city = req.query.city;
     const date = req.query.date;
 
     try {
+      // Send a GET request to the weather API to fetch weather data
       const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&dt=${date}`);
 
+      // Extract relevant data from the weather API response
       const weatherData = {
         location: response.data.location.name,
         temperature: response.data.current.temp_c,
@@ -66,6 +70,7 @@ app.get('/weather', async (req, res) => {
         forecastDay: response.data.forecast.forecastday
       };
 
+      // Send the weather data as a JSON response
       res.json(weatherData);
     } catch (error) {
       console.error(error);
@@ -74,6 +79,7 @@ app.get('/weather', async (req, res) => {
   }
 });
 
+// Start the server and listen on port 5000
 app.listen(5000, () => {
   console.log('Server is running on port 5000');
 });
