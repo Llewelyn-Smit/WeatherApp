@@ -81,6 +81,7 @@ function SearchPartial() {
               </label>
 
               <input
+              required
                 type="text"
                 className="form-control text-center"
                 id="location-input"
@@ -95,6 +96,7 @@ function SearchPartial() {
               </label>
 
               <input
+              required
                 type="date"
                 className="form-control text-center"
                 id="date-input"
@@ -108,6 +110,7 @@ function SearchPartial() {
               </label>
 
               <select
+              required
                 className="form-control text-center"
                 id="standard-input"
                 onChange={handleStandardChange}
